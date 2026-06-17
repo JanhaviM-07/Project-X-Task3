@@ -5,9 +5,7 @@ The Central claim is that  a generalized rule i.e by backpropagation we can succ
 In perceptrons, there are 'feature analysers' between the input and output that are not true hidden units because their input connections are fixed by hand, so their states are completely determined by the input vector: they do not learn representations.
 
 <b>Core Architecture & Algorithm</b><br>
-Here Input flows through layers 
-Input Layer a Dictated by the dimensionality of the specific problem.
-Hidden Layers are one or more layers of units equipped with an activation bias and the logistic sigmoid function:
+The simplest form of the learning procedure is for layered networks which have a layer of input units at the bottom any number of intermediate layers and a layer of output units at the top.A unit has a real-valued output, y, which is a non-linear function of its total input:<br>
 <br>
 <img width="100" height="50" alt="Screenshot 2026-06-15 234025" src="https://github.com/user-attachments/assets/62322919-665a-4a0f-94c1-036bc929120e" />
 
@@ -37,9 +35,8 @@ For a hidden unit: <br>
 <b>Weight Adjustments:</b> Apply gradient descent with a momentum parameter to update connections after every epoch or pattern step:
 <br><img width="240" height="40" alt="Screenshot 2026-06-16 001309" src="https://github.com/user-attachments/assets/28ecd350-f762-457a-9470-a2b21aba402b" />
 <br>
-To confirm our implementation matches the paper's benchmarks, I have targeted the classic Symmetry Detection Problem. 
 
-<b>3. Datasets, Evaluation Metrics, & Baselines</b><br>
 
-<b>The Dataset:</b> A vector of binary values i.e if  6 inputs, then 2^6 = 64 total possible binary combinations. The pattern is to check if it is perfectly symmetric around its midpoint.
-and the task is to check whether it is symmetric about middle or not by backpropagation.
+<b>3. Datasets, Evaluation Metrics</b><br>
+
+<b>The Dataset:</b> A vector of binary values i.e if  6 inputs, then 2^6 = 64 total possible binary combinations. To confirm that the implementation matches the paper's benchmarks, I have chosen the Symmetry Detection Problem i.e.   to check if input number is perfectly symmetric around its about middle or not by backpropagation. 
