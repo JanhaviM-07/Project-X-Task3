@@ -1,4 +1,8 @@
 # Project-X-Task3<br>
+Name: JANHAVI ATUL MAHAJAN<br>
+Branch:IT<br>
+Mail id: jamahajan_b25@it.vjti.ac.in<br><br>
+
 To verify Backpropagation research paper, I considered all 4 digit binary numbers and check whether it is symmetric about center or not.<br>
 
   The   PAPERNOTES.md consists of the claim and concept of Backpropagation, sigmoid function and calculating the errors inshort.<br>
