@@ -11,4 +11,4 @@ The src.py file consists of my slution code. At first generate all 16 combinatio
 
 The final ans is nearly correct as both the hidden units in result balance eachother and hence cancel eachother telling us that there is symmetric pattern. Hence proved by  Backpropagation with certain non-zero error.<br>
 
-The results.md contains screenshots of execution.I executed code twice and hence uploaded 2 screenshots because the error percentage changes each time.
+The results.md contains screenshot of execution.
