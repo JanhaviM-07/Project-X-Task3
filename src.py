@@ -1,10 +1,11 @@
 import torch
 
+torch.manual_seed(42)
+X=torch.zeros((256,8))
+Y=torch.zeros((256,1))
 
-X=torch.zeros((16,4))
-Y=torch.zeros((16,1))
-for i in range((16)):
-    binary=f"{i:04b}"
+for i in range((256)):
+    binary=f"{i:08b}"
     X[i]=torch.tensor([float(char) for char in binary])
 
 
@@ -13,10 +14,20 @@ for i in range((16)):
     else:
      Y[i]=0.0
 
-w1=torch.randn(4,2)*0.5
-b1=torch.randn(1,2)*0.5
+shuffle=torch.randperm(256)
+sizeTrain=int(0.8*256)
+train=shuffle[:sizeTrain]
+test=shuffle[sizeTrain:]
 
-w2=torch.randn(2,1)*0.5
+Xtrain,Ytrain=X[train],Y[train]
+Xtest,Ytest=X[test],Y[test]
+print(f'Total Train datasets:{sizeTrain}')
+
+
+w1=torch.randn(8,8)*0.5
+b1=torch.randn(1,8)*0.5
+
+w2=torch.randn(8,1)*0.5
 b2=torch.randn(1,1)*0.5
 
 
@@ -36,8 +47,8 @@ print("Generating Random weights")
 print("\n")
 
 for epoch in range(1,epochs+1):
-    epochError=0.0
-    indices=torch.randperm(16)
+    trainError=0.0
+    indices=torch.randperm(sizeTrain)
 
     for i in indices:
         X_i=X[i].unsqueeze(0)
@@ -47,7 +58,7 @@ for epoch in range(1,epochs+1):
         hiddenInput=sigmoid(torch.matmul(X_i,w1)+b1)
         hiddenOutput=sigmoid(torch.matmul(hiddenInput,w2)+b2)
 
-        epochError+=0.5*torch.sum((hiddenOutput-target)**2).item()
+        trainError+=0.5*torch.sum((hiddenOutput-target)**2).item()
 
 #now for backward pass
         delOutput=(hiddenOutput-target)*(hiddenOutput*(1.0-hiddenOutput))
@@ -65,10 +76,27 @@ for epoch in range(1,epochs+1):
         b1+=v_b1
 
     if epoch==1 or epoch%2000==0:
-        print(f"Epoch {epoch:4d}|Total system error: {epochError:.5f}")
+        print(f"Epoch {epoch:5d}|Total system error: {trainError:.5f}")
 
 print("\n")
-print("verify randomly generated weights:")
-print(f"Final weights for Hidden unit1:{w1[:,0].numpy()}")
-print(f"Final weights for Hidden unit2:{w1[:,1].numpy()}")
-print("They will still be inverse, mirror-image of each another.")
+print("Evaluating Model against Test")
+
+testError=0.0
+correctAns=0.0
+
+with torch.no_grad():
+   for i in range(len(Xtest)):
+      Xi=Xtest[i].unsqueeze(0)
+      target=Ytest[i].item()
+
+      hiddenInput=sigmoid(torch.matmul(Xi,w1)+b1)
+      hiddenOutput=sigmoid(torch.matmul(hiddenInput,w2)+b2)
+
+      binaryAns=1.0 if hiddenOutput>=0.5 else 0.0
+      if binaryAns==target:
+         correctAns+=1
+      testError+=0.5*(hiddenOutput-target)**2  
+
+accuracy=(correctAns/len(Xtest))*100
+
+print(f"Total Test Error:{testError}")
