@@ -39,4 +39,4 @@ For a hidden unit: <br>
 
 <b>3. Datasets, Evaluation Metrics</b><br>
 
-<b>The Dataset:</b> A vector of binary values i.e if  6 inputs, then 2^6 = 64 total possible binary combinations. To confirm that the implementation matches the paper's benchmarks, I have chosen the Symmetry Detection Problem i.e.   to check if input number is perfectly symmetric around its about middle or not by backpropagation. 
+<b>The Dataset:</b> A vector of binary values i.e if  8bit, then 2^8 = 256 total possible binary combinations. To confirm that the implementation matches the paper's benchmarks, I have chosen the Symmetry Detection Problem i.e.   to check if input number is perfectly symmetric around its about middle or not by backpropagation. 
